@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Edit Tree</title>
+</head>
+
+<body style="background-color: rgba(177, 177, 177, 0.884);">
+
+    <div class="container d-flex  mt-4 ">
+        <nav class="navbar fixed-top navbar-dark bg-primary">
+            <p class="navbar-brand text-dark">Arbortrary</p>
+    
+            <div class="">
+                <a class="navbar-brand text-success mr-5" href="/my_trees">My Trees</a>
+                <p class="navbar-brand text-warning mr-5">Welcome, {{user.first_name}}!</p>
+                <a class="navbar-brand text-light" href="/welcome">Dashboard </a>
+                <a class="navbar-brand text-light" href="/logout"> Logout</a>
+            </div>
+        </nav>
+        
+        <div class="container m-5  text-primary card" style="background-color: rgb(70, 69, 69);">
+            <h1 class="m-3">Replant Your Tree?</h1>
+            {%with messages = get_flashed_messages(category_filter=['tree']) %}
+            {%if messages%}
+            <p class="alert alert-danger alert-heading">
+                {%for message in messages%}
+                **{{message}}**
+                <br>
+                {%endfor%}
+            </p>
+            {%endif%}
+            {%endwith%}
+            <form action="/update_tree" method="post">
+                <input type="hidden"  name="tree_id" value='{{tree.id}}''>
+                <div class="form-group">
+                    <label for="species">Species</label>
+                    <input type="text" class="form-control" name="species" value="{{tree.species}}">
+                </div>
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" class="form-control" name="location" value="{{tree.location}}">
+                </div>
+                <div class="form-group">
+                    <label for="reason">Reason</label>
+                    <input type="text" class="form-control" name="reason" value="{{tree.reason}}">
+                </div>
+                <div class="form-group">
+                    <label for="date_planted">Date Planted</label>
+                    <input type="date" class="form-control" name="date_planted" value="{{tree.date_planted}}">
+                </div>
+                <input type="submit" class="btn btn-primary mb-2" value="Update">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>User's Trees</title>
+</head>
+
+<body style="background-color: rgba(177, 177, 177, 0.884);">
+    <div class="container d-flex  mt-5 ">
+        <nav class="navbar fixed-top navbar-dark bg-primary">
+                <p class="navbar-brand text-dark">Arbortrary</p>
+
+            <div>
+                <p class="navbar-brand text-warning mr-5">Welcome, {{user.first_name}}!</p>
+                <a class="navbar-brand text-light" href="/welcome">Dashboard </a>
+                <a class="navbar-brand text-light" href="/logout"> Logout</a>
+            </div>
+        </nav>
+        <div class="container">
+
+            <div class="jumbotron my-3">    
+                <table class="table table-hover">
+                    <h1>Manage My Trees</h1>
+                    <thead>
+                        <tr>
+                            <th>Species</th>
+                            <th>Date Planted</th>
+                            <th>Select</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tree in trees %}
+                        <tr>
+                            <th scope="row">{{tree.species | capitalize}}</th>
+                            <td>{{tree.date_planted.strftime("%B %d, %Y")}}</td>
+                            <td><a href="/delete/{{tree.id}}">Delete</a> |
+                           <a href="/edit/{{tree.id}}">Edit</a></td>
+                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+    </body>
+
+</html>

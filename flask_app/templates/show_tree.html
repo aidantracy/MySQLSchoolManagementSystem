@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Show Tree</title>
+</head>
+
+<body style="background-color: rgba(177, 177, 177, 0.884);">
+    <div class="container d-flex  mt-5 ">
+        <nav class="navbar fixed-top navbar-dark bg-primary">
+                <p class="navbar-brand text-dark">Arbortrary</p>
+
+            <div class="">
+                <a class="navbar-brand text-success mr-5" href="/my_trees">My Trees</a>
+                <p class="navbar-brand text-warning mr-5">Welcome, {{user.first_name}}!</p>
+                <a class="navbar-brand text-light" href="/welcome">Dashboard </a>
+                <a class="navbar-brand text-light" href="/logout"> Logout</a>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="jumbotron my-1">    
+                <h1 class="text-center">{{tree.species}} planted by {{tree.owner.first_name}} {{tree.owner.last_name}}</h1>
+                <hr>
+                <div class="container d-flex">
+                    <div class="container">
+                        <h4>Where: {{tree.location}}</h4>
+                        <br>
+                        <h4>When: {{tree.date_planted.strftime("%B %d, %Y")}}</h4>
+                        <br>
+                        <h4>Reason: {{tree.reason}}</h4>
+                    </div>
+                    <div class="container w-50">
+                        <h4>Visited by:</h4>
+                        <ul class="border border-dark list-unstyled text-center">
+                            {% if visitors %}
+                            {% for visitor in visitors %}
+                            <li>{{visitor.first_name}} {{visitor.last_name}}</li>
+                            {% endfor %}
+                            {% endif %}
+                        </ul>
+                        <a href="/visited/{{tree.id}}">Did you visit this tree?</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </body>
+
+</html>
